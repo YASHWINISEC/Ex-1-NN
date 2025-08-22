@@ -1,7 +1,7 @@
-<H3>ENTER YOUR NAME</H3>
-<H3>ENTER YOUR REGISTER NO.</H3>
+<H3>ENTER YOUR NAME: YASHWINI M</H3>
+<H3>ENTER YOUR REGISTER NO. 212223230249</H3>
 <H3>EX. NO.1</H3>
-<H3>DATE</H3>
+<H3>DATE: 22-08-2025</H3>
 <H1 ALIGN =CENTER> Introduction to Kaggle and Data preprocessing</H1>
 
 ## AIM:
@@ -37,11 +37,65 @@ STEP 5:Normalizing the data<BR>
 STEP 6:Splitting the data into test and train<BR>
 
 ##  PROGRAM:
-TYPE YOUR CODE HERE
+```python
+from google.colab import files
+import pandas as pd
+import io
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.model_selection import train_test_split
 
+df=pd.read_csv('/content/Churn_Modelling.csv')
+print(df)
+print("\n")
+
+x=df.iloc[:,:-1].values
+print(x)
+print("\n")
+
+y=df.iloc[:,-1].values
+print(y)
+print("\n")
+
+print(df.isnull().sum())
+print("\n")
+
+numeric_cols = df.select_dtypes(include=np.number).columns
+df[numeric_cols] = df[numeric_cols].fillna(df[numeric_cols].mean().round(1))
+
+print(df.isnull().sum())
+print("\n")
+
+y=df.iloc[:,-1].values
+print(y)
+print("\n")
+
+df.duplicated()
+print(df['EstimatedSalary'].describe())
+print("\n")
+
+scaler=MinMaxScaler()
+df1=pd.DataFrame(scaler.fit_transform(df[numeric_cols])) # Scale only numeric columns
+print(df1)
+print("\n")
+
+
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2)
+print(x_train)
+print(len(x_train))
+print("\n")
+print(x_test)
+print(len(x_test))
+```
 
 ## OUTPUT:
-SHOW YOUR OUTPUT HERE
+<img width="770" height="249" alt="image" src="https://github.com/user-attachments/assets/dc01965d-1d60-412a-a7e2-e7a42fdda359" />
+<img width="666" height="541" alt="image" src="https://github.com/user-attachments/assets/c6c7bff5-72e1-4596-b83e-1bfb55461055" />
+<img width="630" height="550" alt="image" src="https://github.com/user-attachments/assets/2a38e6a0-b217-46b3-90e3-b5714a301daf" />
+<img width="845" height="470" alt="image" src="https://github.com/user-attachments/assets/55ce1682-2e21-40d0-aa33-7da03540d0c7" />
+<img width="627" height="678" alt="image" src="https://github.com/user-attachments/assets/37ce787f-6254-4f8e-940d-a2036606afb3" />
+
 
 
 ## RESULT:
